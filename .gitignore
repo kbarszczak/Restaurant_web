@@ -1,0 +1,81 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/restaurant/dist
+/restaurant/tmp
+/restaurant/out-tsc
+/restaurant/bazel-out
+
+# Node
+/restaurant/node_modules
+/restaurant/npm-debug.log
+/restaurant/yarn-error.log
+
+# IDEs and editors
+/restaurant/.idea/
+/restaurant/.project
+/restaurant/.classpath
+/restaurant/.c9/
+/restaurant/*.launch
+/restaurant/.settings/
+/restaurant/*.sublime-workspace
+
+# Visual Studio Code
+/restaurant/.vscode/*
+!/restaurant/.vscode/settings.json
+!/restaurant/.vscode/tasks.json
+!/restaurant/.vscode/launch.json
+!/restaurant/.vscode/extensions.json
+/restaurant/.history/*
+
+# Miscellaneous
+/restaurant/.angular/cache
+/restaurant/.sass-cache/
+/restaurant/connect.lock
+/restaurant/coverage
+/restaurant/libpeerconnection.log
+/restaurant/testem.log
+/restaurant/typings
+
+# System files
+/restaurant/.DS_Store
+/restaurant/Thumbs.db
+
+/restaurant_backend/target/*
+/restaurant_backend/.idea/*
+
+/restaurant_backend/HELP.md
+/restaurant_backend/target/
+!/restaurant_backend/.mvn/wrapper/maven-wrapper.jar
+!/restaurant_backend/**/src/main/**/target/
+!/restaurant_backend/**/src/test/**/target/
+
+### STS ###
+/restaurant_backend/.apt_generated
+/restaurant_backend/.classpath
+/restaurant_backend/.factorypath
+/restaurant_backend/.project
+/restaurant_backend/.settings
+/restaurant_backend/.springBeans
+/restaurant_backend/.sts4-cache
+
+### IntelliJ IDEA ###
+/restaurant_backend/.idea
+/restaurant_backend/*.iws
+/restaurant_backend/*.iml
+/restaurant_backend/*.ipr
+
+### NetBeans ###
+/restaurant_backend/nbproject/private/
+/restaurant_backend/nbbuild/
+/restaurant_backend/dist/
+/restaurant_backend/nbdist/
+/restaurant_backend/.nb-gradle/
+build/
+!/restaurant_backend/**/src/main/**/build/
+!/restaurant_backend/**/src/test/**/build/
+
+### VS Code ###
+/restaurant_backend/.vscode/
+
+
