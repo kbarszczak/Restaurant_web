@@ -2,7 +2,7 @@
 
     <div class="logo">
         <h1><a routerLink="/home">{{title}}</a></h1>
-        <p *ngIf="auth.isLoggedIn()">Hi {{auth.userName.charAt(0).toUpperCase() + auth.userName.slice(1).toLowerCase()}}</p>
+        <p *ngIf="auth.isLoggedIn()">Hi {{auth.credentials()}}</p>
     </div>
     <div *ngIf="auth.isLoggedIn(); else elseBlock" class="menu">  <!-- logged in user -->
         <a routerLink="/dishes">Dishes</a>

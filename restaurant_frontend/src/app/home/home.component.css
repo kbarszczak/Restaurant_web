@@ -1,0 +1,29 @@
+.container{
+    width: 80%;
+    margin: auto;
+    text-align: justify;
+}
+
+.content{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content p{
+    margin: 20px;
+}
+
+.img-cont{
+    margin: 20px;
+    min-width: 300px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.img-cont img{
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+}

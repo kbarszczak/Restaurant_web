@@ -8,19 +8,11 @@ export class AuthService {
 
     private http: HttpClient
     private readonly url: string
-    jwt: string;
-    refreshJwt: string;
-    userName: string
-    roles: Array<string>
     error: string
 
     constructor(http: HttpClient) {
         this.http = http;
         this.url = "http://localhost:9090"
-        this.jwt = ""
-        this.refreshJwt = ""
-        this.userName = ""
-        this.roles = []
         this.error = ""
     }
 
@@ -42,19 +34,21 @@ export class AuthService {
             }
             return response
         }).then(r => {
-            this.userName = r.body.name
-            this.jwt = r.body.token
-            this.refreshJwt = r.body.refreshToken
-            this.roles = r.body.roles
+            let roles: Array<string> = r.body.roles
+            localStorage.setItem('token', r.body.token)
+            localStorage.setItem('refresh_token', r.body.token)
+            localStorage.setItem('name', r.body.name)
+            localStorage.setItem('surname', r.body.surname)
+            localStorage.setItem('is_admin', roles.indexOf("ROLE_ADMIN") >= 0 ? "true" : "false")
+            localStorage.setItem('is_user', roles.indexOf("ROLE_USER") >= 0 ? "true" : "false")
+            localStorage.setItem('is_manager', roles.indexOf("ROLE_MANAGER") >= 0 ? "true" : "false")
         }).catch(e => {
             console.log(e)
         })
     }
 
     logout() {
-        this.jwt = ""
-        this.refreshJwt = ""
-        this.roles = []
+        localStorage.clear()
     }
 
     async register(name: string, surname: string, email: string, password: string) {
@@ -81,24 +75,25 @@ export class AuthService {
         })
     }
 
-    hasRole(role: string) {
-        return role.indexOf(role) >= 0
+    credentials():string {
+        let name = localStorage.getItem("name");
+        if(name === null || name === undefined) return ""
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
     }
 
     isAdmin() {
-        return this.hasRole("ROLE_ADMIN")
+        return localStorage.getItem("is_admin") === "true"
     }
 
     isUser() {
-        return this.hasRole("ROLE_USER")
+        return localStorage.getItem("is_user") === "true"
     }
 
     isManager() {
-        return this.hasRole("ROLE_MANAGER")
+        return localStorage.getItem("is_manager") === "true"
     }
 
     isLoggedIn() {
-        return this.jwt !== ""
+        return localStorage.getItem("token") != null
     }
-
 }
