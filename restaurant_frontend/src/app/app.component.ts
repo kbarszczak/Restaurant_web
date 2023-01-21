@@ -1,10 +1,20 @@
 import { Component } from '@angular/core';
+import {AuthService} from "./auth.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styles: []
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'restaurant_frontend';
+
+  auth: AuthService
+  title = "Restaurant"
+
+  constructor(auth: AuthService) {
+    // todo: load proper window
+    this.auth = auth
+  }
+
+
 }

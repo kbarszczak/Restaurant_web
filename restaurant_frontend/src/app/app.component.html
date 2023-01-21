@@ -1,1 +1,15 @@
-<h1>{{title}}</h1>
+<div class="menu">
+
+    <h1>{{title}}</h1>
+    <div *ngIf="auth.isLoggedIn(); else elseBlock" class="button">  <!-- logged in user -->
+        <a routerLink="/dishes">Dishes</a>
+        <a routerLink="/basket">Basket</a>
+        <a (click)="auth.logout()">Logout</a>
+    </div>
+    <ng-template #elseBlock> <!-- guest -->
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+    </ng-template>
+
+</div>
+<router-outlet></router-outlet>
