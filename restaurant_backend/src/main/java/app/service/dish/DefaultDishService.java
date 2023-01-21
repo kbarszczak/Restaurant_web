@@ -35,6 +35,7 @@ public class DefaultDishService implements DishService{
         if(dish.getImageUrl() == null || dish.getImageUrl().isEmpty()) throw new IllegalArgumentException("The image url is either null or an empty string");
         if(dish.getPrice() == null || dish.getPrice() < 0) throw new IllegalArgumentException("The price cannot be negative");
         if(dish.getMaxQuantity() == null || dish.getMaxQuantity() <= 0) throw new IllegalArgumentException("The max quantity has to be positive integer");
+        if(dish.getIngredients() == null) throw new IllegalArgumentException("The dish ingredients are not set");
 
         Optional<Dish> d = dishDao.findDishByNameEquals(dish.getName());
         if(d.isPresent()) throw new IllegalStateException("The dish with the name '" + dish.getName() + "' is already in the database");
@@ -58,6 +59,7 @@ public class DefaultDishService implements DishService{
         if(dish.getPrice() != null) entity.setPrice(dish.getPrice());
         if(dish.getMaxQuantity() != null) entity.setMaxQuantity(dish.getMaxQuantity());
         if(dish.getIngredients() != null) entity.setIngredients(dish.getIngredients());
+
         dishDao.save(entity);
         return null;
     }
