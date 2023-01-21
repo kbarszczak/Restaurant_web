@@ -34,16 +34,20 @@ export class AuthService {
                 email: email,
                 password: password
             })
-        }).then(r => {
-            if (r.status != HttpStatusCode.Ok) throw Error()
-            return r.json()
+        }).then(async r => {
+            let response = r.json()
+            if (r.status != HttpStatusCode.Ok) {
+                await response.then(r => this.error = r.message)
+                throw Error()
+            }
+            return response
         }).then(r => {
             this.userName = r.body.name
             this.jwt = r.body.token
             this.refreshJwt = r.body.refreshToken
             this.roles = r.body.roles
         }).catch(e => {
-            this.error = "Bad credentials"
+            console.log(e)
         })
     }
 
@@ -53,9 +57,28 @@ export class AuthService {
         this.roles = []
     }
 
-    register(name: string, surname: string, email: string, password: string): string {
-        // todo: register
-        return ""
+    async register(name: string, surname: string, email: string, password: string) {
+        await fetch(this.url + "/api/v1/auth/register", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                surname: surname,
+                email: email,
+                password: password
+            })
+        }).then(async r => {
+            let response = r.json()
+            if (r.status != HttpStatusCode.Ok) {
+                await response.then(r => {
+                    this.error = r.message
+                })
+            }
+        }).catch(e => {
+            console.log(e)
+        })
     }
 
     hasRole(role: string) {

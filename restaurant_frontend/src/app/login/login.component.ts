@@ -46,8 +46,13 @@ export class LoginComponent {
         if (this.emailError !== "" || this.passwordError !== "") return
 
         await this.auth.login(this.email, this.password)
-        if (!this.auth.isLoggedIn()) this.passwordError = this.auth.error
-        else this.router.navigate(["/home"]).catch(e => console.log(e))
+        if (this.auth.error !== "") {
+            this.passwordError = this.auth.error
+            this.auth.error = ""
+            return
+        }
+
+        this.router.navigate(["/home"]).catch(e => console.log(e))
     }
 
 }
