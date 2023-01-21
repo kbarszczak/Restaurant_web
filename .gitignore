@@ -1,45 +1,45 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/restaurant/dist
-/restaurant/tmp
-/restaurant/out-tsc
-/restaurant/bazel-out
+/restaurant_frontend/dist
+/restaurant_frontend/tmp
+/restaurant_frontend/out-tsc
+/restaurant_frontend/bazel-out
 
 # Node
-/restaurant/node_modules
-/restaurant/npm-debug.log
-/restaurant/yarn-error.log
+/restaurant_frontend/node_modules
+/restaurant_frontend/npm-debug.log
+/restaurant_frontend/yarn-error.log
 
 # IDEs and editors
-/restaurant/.idea/
-/restaurant/.project
-/restaurant/.classpath
-/restaurant/.c9/
-/restaurant/*.launch
-/restaurant/.settings/
-/restaurant/*.sublime-workspace
+/restaurant_frontend/.idea/
+/restaurant_frontend/.project
+/restaurant_frontend/.classpath
+/restaurant_frontend/.c9/
+/restaurant_frontend/*.launch
+/restaurant_frontend/.settings/
+/restaurant_frontend/*.sublime-workspace
 
 # Visual Studio Code
-/restaurant/.vscode/*
-!/restaurant/.vscode/settings.json
-!/restaurant/.vscode/tasks.json
-!/restaurant/.vscode/launch.json
-!/restaurant/.vscode/extensions.json
-/restaurant/.history/*
+/restaurant_frontend/.vscode/*
+!/restaurant_frontend/.vscode/settings.json
+!/restaurant_frontend/.vscode/tasks.json
+!/restaurant_frontend/.vscode/launch.json
+!/restaurant_frontend/.vscode/extensions.json
+/restaurant_frontend/.history/*
 
 # Miscellaneous
-/restaurant/.angular/cache
-/restaurant/.sass-cache/
-/restaurant/connect.lock
-/restaurant/coverage
-/restaurant/libpeerconnection.log
-/restaurant/testem.log
-/restaurant/typings
+/restaurant_frontend/.angular/cache
+/restaurant_frontend/.sass-cache/
+/restaurant_frontend/connect.lock
+/restaurant_frontend/coverage
+/restaurant_frontend/libpeerconnection.log
+/restaurant_frontend/testem.log
+/restaurant_frontend/typings
 
 # System files
-/restaurant/.DS_Store
-/restaurant/Thumbs.db
+/restaurant_frontend/.DS_Store
+/restaurant_frontend/Thumbs.db
 
 /restaurant_backend/target/*
 /restaurant_backend/.idea/*
