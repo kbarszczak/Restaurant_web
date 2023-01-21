@@ -24,4 +24,33 @@ public class ControllerUtil {
         }
     }
 
+    public static <R> ResponseEntity<R> executeRaw(Executable<R> executable){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(executable.execute());
+        } catch (IllegalStateException | IllegalArgumentException exception){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (JwtException | BadCredentialsException exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        } catch (Exception exception){
+            System.out.println("Exception name: '" + exception.getClass().getName() + "'");
+            exception.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    public static ResponseEntity<String> executeString(Executable<Void> executable){
+        try{
+            executable.execute();
+            return ResponseEntity.status(HttpStatus.OK).body("Success");
+        } catch (IllegalStateException | IllegalArgumentException exception){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+        } catch (JwtException | BadCredentialsException exception){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
+        } catch (Exception exception){
+            System.out.println("Exception name: '" + exception.getClass().getName() + "'");
+            exception.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+        }
+    }
+
 }

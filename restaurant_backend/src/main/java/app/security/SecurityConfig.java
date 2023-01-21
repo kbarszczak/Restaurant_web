@@ -4,6 +4,7 @@ import app.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -31,11 +32,27 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception{
         http
                 .csrf().disable()
+
+                // endpoints security
                 .authorizeHttpRequests()
+
+                // authentication
                 .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/refresh")
                 .permitAll()
+
+                // managing dishes
+                .requestMatchers(HttpMethod.GET, "/api/v1/dishes")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/dishes")
+                .hasAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/dishes")
+                .hasAuthority("ROLE_ADMIN")
+
+                // any other request
                 .anyRequest()
                 .authenticated()
+
+                // other security settings
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
