@@ -9,12 +9,11 @@ import {AuthService} from "./auth.service";
 export class AppComponent {
 
   auth: AuthService
-  title = "Restaurant"
+  title: string
 
   constructor(auth: AuthService) {
-    // todo: load proper window
     this.auth = auth
+    this.title = "Restaurant"
   }
-
 
 }

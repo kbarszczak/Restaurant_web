@@ -1,1 +1,20 @@
-<p>login works!</p>
+<div class="container">
+    <div class="buttons">
+        <div class="field">
+            <label for="email">Email</label>
+            <input (keyup)="updateEmail($event)" type="text" id="email">
+        </div>
+        <p *ngIf="emailError!==''" class="error">{{emailError}}</p>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input (keyup)="updatePassword($event)" type="password" id="password">
+        </div>
+        <p *ngIf="passwordError!==''" class="error">{{passwordError}}</p>
+
+        <div class="field">
+            <button (click)="cancel()">Cancel</button>
+            <button (click)="submit()">Login</button>
+        </div>
+    </div>
+</div>

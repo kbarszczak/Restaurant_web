@@ -10,10 +10,14 @@ import lombok.RequiredArgsConstructor;
 import model.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -38,9 +42,19 @@ public class DefaultAuthService implements AuthService{
         String password = request.getPassword();
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-        UserDetails user = userDao.loadUserByUsername(email);
-        if(user == null) throw new Exception("Cannot generate token. The unknown exception occurred");
-        return new LoginResponse(jwtUtil.generateToken(user, tokenValidForMs), jwtUtil.generateToken(user, refreshTokenValidForMs));
+        Optional<User> user = userDao.findByEmailEquals(email);
+        if(user.isEmpty()) throw new IllegalStateException("The used with email '" + email + "' does not exist");
+
+        UserDetails userDetails = userDao.loadUserByUsername(email);
+        if(userDetails == null) throw new Exception("Cannot generate token. The unknown exception occurred");
+
+        return new LoginResponse(
+                jwtUtil.generateToken(userDetails, tokenValidForMs),
+                jwtUtil.generateToken(userDetails, refreshTokenValidForMs),
+                extractRoles(userDetails.getAuthorities()),
+                user.get().getName(),
+                user.get().getSurname()
+        );
     }
 
     @Override
@@ -48,8 +62,19 @@ public class DefaultAuthService implements AuthService{
         if(request == null) throw new IllegalArgumentException("The body was not provided");
         if(request.getRefreshToken() == null || request.getRefreshToken().isEmpty()) throw new IllegalArgumentException("The refresh token is either null or empty string");
 
-        UserDetails user = userDao.loadUserByUsername(jwtUtil.extractUsername(request.getRefreshToken()));
-        return new LoginResponse(jwtUtil.generateToken(user, tokenValidForMs), request.getRefreshToken());
+        String email = jwtUtil.extractUsername(request.getRefreshToken());
+        UserDetails userDetails = userDao.loadUserByUsername(email);
+
+        Optional<User> user = userDao.findByEmailEquals(email);
+        if(user.isEmpty()) throw new IllegalStateException("The used with email '" + email + "' does not exist");
+
+        return new LoginResponse(
+                jwtUtil.generateToken(userDetails, tokenValidForMs),
+                request.getRefreshToken(),
+                extractRoles(userDetails.getAuthorities()),
+                user.get().getName(),
+                user.get().getSurname()
+        );
     }
 
     @Override
@@ -77,5 +102,16 @@ public class DefaultAuthService implements AuthService{
         );
         userDao.insert(user);
         return null;
+    }
+
+    private static String[] extractRoles(Collection<? extends GrantedAuthority> authorities){
+        String []roles = new String[authorities.size()];
+        int index = 0;
+        for(GrantedAuthority authority : authorities){
+            if(authority instanceof SimpleGrantedAuthority simpleGrantedAuthority){
+                roles[index] = simpleGrantedAuthority.getAuthority();
+            }
+        }
+        return roles;
     }
 }
