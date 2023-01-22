@@ -103,22 +103,11 @@ public class DefaultDishService implements DishService {
 
     @Override
     public Void addDishReview(String authorEmail, String dishId, String text, Integer rating) {
-        Optional<User> author = userDao.findByEmailEquals(authorEmail);
-        if (author.isEmpty())
-            throw new IllegalArgumentException("The user with email '" + authorEmail + "' does not exist");
+        User author = getUserByEmail(authorEmail);
+        Dish dish = getDishById(dishId);
 
-        Optional<Dish> dish = dishDao.findDishByIdEquals(dishId);
-        if (dish.isEmpty()) throw new IllegalArgumentException("The dish with id '" + dishId + "' does not exist");
-
-        List<Order> orders = orderDao.findOrdersByAuthorId(author.get().getId());
-        if (orders.stream().filter(p -> {
-            for (Dish d : p.getDishes()) {
-                if (d.getId().equals(dishId)) return true;
-            }
-            return false;
-        }).findFirst().isEmpty()) {
-            throw new IllegalArgumentException("The user with id '" + author.get().getId() + "' never ordered dish with id '" + dishId + "'");
-        }
+        List<Order> orders = orderDao.findOrdersByAuthorId(author.getId());
+        if (orders.stream().noneMatch(p -> p.getDish().getId().equals(dishId))) throw new IllegalArgumentException("The user with id '" + author.getId() + "' never ordered dish with id '" + dishId + "'");
 
         if (text.length() < 50 || text.length() > 500)
             throw new IllegalArgumentException("The review text length must be in the range from 50 to 500 characters");
@@ -126,12 +115,25 @@ public class DefaultDishService implements DishService {
             throw new IllegalArgumentException("The review rate must be in the range from 0 to 5");
 
         reviewDao.insert(new Review(
-                author.get(),
-                dish.get(),
+                author,
+                dish,
                 rating,
                 text
         ));
         return null;
+    }
+
+    private User getUserByEmail(String email){
+        Optional<User> user = userDao.findByEmailEquals(email);
+        if (user.isEmpty())
+            throw new IllegalArgumentException("The user with email '" + email + "' does not exist");
+        return user.get();
+    }
+
+    private Dish getDishById(String id){
+        Optional<Dish> dish = dishDao.findDishByIdEquals(id);
+        if (dish.isEmpty()) throw new IllegalArgumentException("The dish with id '" + id + "' does not exist");
+        return dish.get();
     }
 
 }

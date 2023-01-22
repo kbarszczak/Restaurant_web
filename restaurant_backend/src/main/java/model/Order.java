@@ -22,13 +22,16 @@ public class Order {
     private User author;
 
     @DBRef
-    private Dish[] dishes;
+    private Dish dish;
+
+    private Integer quantity;
 
     private LocalDate orderedAt;
 
-    public Order(User author, Dish[] dishes, LocalDate orderedAt) {
+    public Order(User author, Dish dish, Integer quantity, LocalDate orderedAt) {
         this.author = author;
-        this.dishes = dishes;
+        this.dish = dish;
+        this.quantity = quantity;
         this.orderedAt = orderedAt;
     }
 }

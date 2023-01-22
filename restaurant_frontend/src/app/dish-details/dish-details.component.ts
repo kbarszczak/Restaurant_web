@@ -29,6 +29,7 @@ export class DishDetailsComponent {
 
         this.service.loadDishReviews(id).subscribe(p => {
             this.reviews = p
+            console.log("Reviews '"+this.reviews+"'")
         })
     }
 
