@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {HttpClientModule} from "@angular/common/http";
 import {DishService} from "./services/dish.service";
+import {BasketService} from "./services/basket.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {DishService} from "./services/dish.service";
   ],
   providers: [
       AuthService,
-      DishService
+      DishService,
+      BasketService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,18 +1,55 @@
-<div class="items">
-    <div *ngFor="let dish of dishes" class="item" id="{{dish.id}}">
-        <div class="field">
-            <div class="field-image">
-                <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
-            </div>
-        </div>
-        <div class="field">
-            <p>{{dish.name}}</p>
-            <p>{{dish.price}}USD</p>
-        </div>
-        <div *ngIf="auth.isLoggedIn()" class="field">
-            <button (click)="decrease($event)">-</button>
-            <p>{{dish.selectedQuantity}}</p>
-            <button (click)="increase($event)">+</button>
+<div class="container">
+    <div class="nav">
+        <p>Categories</p>
+        <ul>
+            <li *ngFor="let category of categories">
+                <input (click)="categoryChanged($event)" type="checkbox" value="{{category}}" id="{{category}}">
+                <label for="{{category}}">{{category}}</label>
+            </li>
+        </ul>
+
+        <p>Types</p>
+        <ul>
+            <li *ngFor="let type of types">
+                <input (click)="typeChanged($event)" type="checkbox" value="{{type}}" id="{{type}}">
+                <label for="{{type}}">{{type}}</label>
+            </li>
+        </ul>
+
+        <div>
+            <label for="pageCount">Items on page</label>
+            <input (change)="pageItemsCountChanged($event)" type="number" id="pageCount" min="5" max="50" step="5" value="{{onPageItems}}">
         </div>
     </div>
+
+    <div class="items-container">
+        <div class="items">
+            <div *ngFor="let dish of pageDishes[currentPageIndex]" class="item" id="{{dish.id}}">
+                <div class="field">
+                    <div class="field-image">
+                        <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
+                    </div>
+                </div>
+                <div class="field">
+                    <p>{{dish.name}}</p>
+                    <p>{{dish.price}}USD</p>
+                </div>
+                <div *ngIf="auth.isLoggedIn()" class="field">
+                    <button (click)="decrease($event)">-</button>
+                    <p>{{dish.selectedQuantity}}</p>
+                    <button (click)="increase($event)">+</button>
+                </div>
+                <div *ngIf="auth.isAdmin()" class="field">
+                    <button (click)="remove($event)" class="red">Remove</button>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <button (click)="previousPage()">Previous</button>
+            <p>{{(currentPageIndex+1)}}</p>
+            <button (click)="nextPage()">Next</button>
+        </div>
+    </div>
+
 </div>
+
