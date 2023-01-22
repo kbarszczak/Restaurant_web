@@ -25,4 +25,10 @@ public class Review {
     private Integer mark;
     private String description;
 
+    public Review(User author, Dish dish, Integer mark, String description) {
+        this.author = author;
+        this.dish = dish;
+        this.mark = mark;
+        this.description = description;
+    }
 }

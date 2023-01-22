@@ -104,6 +104,13 @@ public class DefaultAuthService implements AuthService{
         return null;
     }
 
+    @Override
+    public String getUserIdByEmail(String email) {
+        Optional<User> user = userDao.findByEmailEquals(email);
+        if(user.isEmpty()) throw new IllegalArgumentException("The user with email '" + email + "' does not exist");
+        return user.get().getId();
+    }
+
     private static String[] extractRoles(Collection<? extends GrantedAuthority> authorities){
         String []roles = new String[authorities.size()];
         int index = 0;

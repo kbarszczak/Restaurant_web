@@ -10,4 +10,5 @@ public interface AuthService {
     LoginResponse login(LoginRequest request) throws Exception;
     LoginResponse refresh(RefreshRequest request) throws Exception;
     Void register(RegistrationRequest request) throws Exception;
+    String getUserIdByEmail(String email);
 }

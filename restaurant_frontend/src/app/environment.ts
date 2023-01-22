@@ -5,5 +5,7 @@ export const environment = {
 export enum ApiPaths {
     Auth = '/api/v1/auth/login',
     Register = "/api/v1/auth/register",
-    DishesAll = "/api/v1/dishes"
+    DishesAll = "/api/v1/dishes",
+    Dish = "/api/v1/dishes",
+    Review = "/api/v1/dishes",
 }

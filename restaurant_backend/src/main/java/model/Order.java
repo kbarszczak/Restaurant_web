@@ -26,4 +26,9 @@ public class Order {
 
     private LocalDate orderedAt;
 
+    public Order(User author, Dish[] dishes, LocalDate orderedAt) {
+        this.author = author;
+        this.dishes = dishes;
+        this.orderedAt = orderedAt;
+    }
 }

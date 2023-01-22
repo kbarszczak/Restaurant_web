@@ -1,25 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Dish} from "../model/dish";
+import {DishService} from "../services/dish.service";
+import {Review} from "../model/review";
 
 @Component({
     selector: 'app-dish-details',
     templateUrl: './dish-details.component.html',
     styleUrls: ['./dish-details.component.css']
 })
-export class DishDetailsComponent implements OnInit {
-
-    // todo: tell if the is error
+export class DishDetailsComponent {
 
     private route: ActivatedRoute
-    id: string | null
+    service: DishService
+    dish: Dish | null
+    reviews: Array<Review>
 
-    constructor(route: ActivatedRoute) {
+    constructor(route: ActivatedRoute, service: DishService) {
         this.route = route
-        this.id = ""
-    }
+        this.service = service
+        this.dish = null
+        this.reviews = []
 
-    ngOnInit(): void {
-        this.id = this.route.snapshot.paramMap.get("id")
+        let id = this.route.snapshot.paramMap.get("id")
+        this.service.loadDishById(id).subscribe(p => {
+            this.dish = p
+        })
+
+        this.service.loadDishReviews(id).subscribe(p => {
+            this.reviews = p
+        })
     }
 
 }
