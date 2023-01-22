@@ -10,13 +10,8 @@ import {DishDetailsComponent} from "./dish-details/dish-details.component";
 const routes: Routes = [
     {path: "", component: HomeComponent},
     {path: "home", component: HomeComponent},
-    {
-        path: "dishes",
-        component: DishesComponent,
-        children: [
-            {path: ":id", component: DishDetailsComponent}
-        ]
-    },
+    {path: "dishes", component: DishesComponent},
+    {path: "dishes/:id", component: DishDetailsComponent},
     {path: "basket", component: BasketComponent},
     {path: "login", component: LoginComponent},
     {path: "register", component: RegisterComponent},

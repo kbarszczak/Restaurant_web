@@ -3,7 +3,6 @@ import {DishService} from "../services/dish.service";
 import {Dish} from "../model/dish";
 import {AuthService} from "../services/auth.service";
 import {BasketService} from "../services/basket.service";
-import {AngularFirestore} from "angular2/firestore"
 
 @Component({
     selector: 'app-dishes',
@@ -13,10 +12,7 @@ import {AngularFirestore} from "angular2/firestore"
 export class DishesComponent implements OnInit{
 
     // todo: click to item and redirect
-    // todo: fix bug that basket have and list not
-    dishes$;
     // routing
-    private afs: AngularFirestore;
 
     // component fields
     service: DishService
@@ -48,6 +44,17 @@ export class DishesComponent implements OnInit{
 
         this.service.loadDishes().subscribe(r => {
             for(let dish of r){
+                let addedFromBasket = false
+                for(let basketDish of this.basket.dishes){
+                    if(basketDish.id === dish.id){
+                        this.dishes.push(basketDish)
+                        this.filteredDishes.push(basketDish)
+                        addedFromBasket = true
+                        break
+                    }
+                }
+                if(addedFromBasket) continue
+
                 dish.selectedQuantity = 0
                 this.dishes.push(dish)
                 this.filteredDishes.push(dish)
