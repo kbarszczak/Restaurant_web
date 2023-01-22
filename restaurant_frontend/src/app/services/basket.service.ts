@@ -1,5 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Dish} from "../model/dish";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ApiPaths, environment} from "../environment";
+import {AuthService} from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +11,7 @@ export class BasketService {
 
     dishes: Array<Dish>
 
-    constructor() {
+    constructor(private http: HttpClient, private auth: AuthService) {
         this.dishes = []
     }
 
@@ -35,4 +38,13 @@ export class BasketService {
     isHuge() {
         return this.getCount() >= 10
     }
+
+    buy(dishId: string, quantity: number){
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.auth.token()}`
+        })
+        return this.http.post<string>(environment.baseUrl+ApiPaths.AddOrder+"?dishId="+dishId+"&quantity="+quantity, {headers: headers})
+    }
+
 }

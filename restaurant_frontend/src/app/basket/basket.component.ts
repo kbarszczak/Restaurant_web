@@ -30,7 +30,7 @@ export class BasketComponent {
         let id = event.target.parentElement.id
         for(let dish of this.service.dishes){
             if(dish.id === id){
-                if(dish.selectedQuantity < dish.maxQuantity-1) {
+                if(dish.selectedQuantity < dish.maxQuantity) {
                     ++dish.selectedQuantity
                 }
             }
@@ -38,6 +38,11 @@ export class BasketComponent {
     }
 
     buy() {
-
+        for(let dish of this.service.dishes){
+            this.service.buy(dish.id, dish.selectedQuantity).subscribe(r =>
+                console.log(r)
+            )
+        }
+        this.service.dishes = []
     }
 }

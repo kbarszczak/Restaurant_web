@@ -11,9 +11,6 @@ import {BasketService} from "../services/basket.service";
 })
 export class DishesComponent{
 
-    // todo: click to item and redirect
-    // routing
-
     // component fields
     service: DishService
     auth: AuthService
@@ -86,7 +83,12 @@ export class DishesComponent{
     }
 
     remove(event: any) {
-        // todo: remove dish. Available only for admin
+        let id = event.target.parentElement.parentElement.id
+        this.service.removeDish(id).subscribe(p =>
+            console.log(p)
+        )
+        this.dishes = this.dishes.filter(p => p.id !== id)
+        this.filteredDishes = this.filteredDishes.filter(p => p.id !== id)
     }
 
     typeChanged(event: any) {

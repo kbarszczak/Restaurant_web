@@ -11,4 +11,5 @@ public interface DishService {
     Void editDish(Dish dish);
     Review[] getDishReviews(String dishId);
     Void addDishReview(String authorEmail, String dishId, String text, Integer rating);
+    Void removeDish(String id);
 }

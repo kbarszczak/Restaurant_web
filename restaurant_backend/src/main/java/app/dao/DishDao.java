@@ -9,4 +9,5 @@ public interface DishDao extends MongoRepository<Dish, String> {
 
     Optional<Dish> findDishByNameEquals(String name);
     Optional<Dish> findDishByIdEquals(String id);
+    void removeById(String id);
 }

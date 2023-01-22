@@ -42,4 +42,12 @@ export class DishService {
         })
         return this.http.post<string>(environment.baseUrl + ApiPaths.Review + "/" + id + "/reviews?text="+text+"&rating="+mark, {headers: headers})
     }
+
+    removeDish(dishId: string){
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.auth.token()}`
+        })
+        return this.http.delete<string>(environment.baseUrl + ApiPaths.RemoveDish + "/" + dishId, {headers: headers})
+    }
 }

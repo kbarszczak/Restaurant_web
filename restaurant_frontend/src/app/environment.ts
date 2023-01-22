@@ -9,4 +9,6 @@ export enum ApiPaths {
     Dish = "/api/v1/dishes",
     Review = "/api/v1/dishes",
     CanReview = "/api/v1/users/orders/exist",
+    AddOrder = "/api/v1/users/orders",
+    RemoveDish = "/api/v1/dishes",
 }

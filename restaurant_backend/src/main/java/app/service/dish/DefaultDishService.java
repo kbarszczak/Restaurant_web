@@ -123,6 +123,12 @@ public class DefaultDishService implements DishService {
         return null;
     }
 
+    @Override
+    public Void removeDish(String id) {
+        dishDao.removeById(id);
+        return null;
+    }
+
     private User getUserByEmail(String email){
         Optional<User> user = userDao.findByEmailEquals(email);
         if (user.isEmpty())

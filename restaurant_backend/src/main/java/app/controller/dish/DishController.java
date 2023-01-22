@@ -26,6 +26,11 @@ public class DishController {
         return executeRaw(() ->  dishService.getDish(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> removeDish(@PathVariable String id){
+        return executeString(() ->  dishService.removeDish(id));
+    }
+
     @GetMapping
     public ResponseEntity<Dish[]> getDishes(){
         return executeRaw(dishService::getDishes);
@@ -48,17 +53,6 @@ public class DishController {
         ));
     }
 
-    @PostMapping("/{id}/reviews2")
-    public ResponseEntity<String> addDishReview(@PathVariable String id){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(!(auth.getPrincipal() instanceof User user)) throw new BadCredentialsException("User not authenticated");
-        return executeString(() ->  dishService.addDishReview(
-                user.getUsername(),
-                id,
-                "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext",
-                5
-        ));
-    }
 
     @PostMapping
     public ResponseEntity<String> addDish(@RequestBody Dish dish){
