@@ -24,6 +24,14 @@ export class BasketService {
         return result
     }
 
+    getValue(): number{
+        let result = 0
+        for(let dish of this.dishes){
+            result += dish.price * dish.selectedQuantity
+        }
+        return Math.round(result*100)/100.0
+    }
+
     isHuge() {
         return this.getCount() >= 10
     }

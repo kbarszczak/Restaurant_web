@@ -1,0 +1,58 @@
+.container{
+    padding: 10px;
+    margin: 40px;
+    box-shadow: 0 0 10px #999;
+}
+
+.centered{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    width: 200px;
+    padding: 0;
+    margin: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submit{
+    padding: 0;
+    margin: 40px;
+}
+
+button{
+    padding: 5px 10px;
+    outline: none;
+    box-shadow: 0 0 5px #555;
+    border: 0;
+    transition: .15s all ease-in-out;
+    cursor: pointer;
+}
+
+button:hover{
+    box-shadow: 0 0 10px #000;
+}
+
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gap{
+    margin: 0 3px 0 3px;
+}

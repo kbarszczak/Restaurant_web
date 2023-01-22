@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DishService} from "../services/dish.service";
 import {Dish} from "../model/dish";
 import {AuthService} from "../services/auth.service";
@@ -9,7 +9,7 @@ import {BasketService} from "../services/basket.service";
     templateUrl: './dishes.component.html',
     styleUrls: ['./dishes.component.css']
 })
-export class DishesComponent implements OnInit{
+export class DishesComponent{
 
     // todo: click to item and redirect
     // routing
@@ -66,11 +66,6 @@ export class DishesComponent implements OnInit{
             this.types = [... new Set(this.types)]
             this.reloadPage()
         })
-    }
-
-    ngOnInit(): void {
-
-        // todo
     }
 
     decrease(event: any) {

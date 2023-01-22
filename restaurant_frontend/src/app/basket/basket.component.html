@@ -1,1 +1,17 @@
-<p>basket works!</p>
+<div class="container centered">
+    <ul class="centered">
+        <p>Items in the cart {{service.getCount()}}</p>
+        <li *ngFor="let dish of service.dishes">
+            <p>{{dish.name}}</p>
+            <div class="menu" id="{{dish.id}}">
+                <button (click)="decrease($event)" class="gap">-</button>
+                <p class="gap">{{dish.selectedQuantity}}</p>
+                <button (click)="increase($event)" class="gap">+</button>
+            </div>
+        </li>
+    </ul>
+    <div class="submit centered">
+        <p>Sum is {{service.getValue()}}USD</p>
+        <button (click)="buy()">Buy</button>
+    </div>
+</div>

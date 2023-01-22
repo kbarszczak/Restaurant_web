@@ -11,6 +11,7 @@
     padding: 40px;
     box-shadow: 0 0 10px #999;
     text-align: center;
+    width: 100%;
 }
 
 ul{
@@ -82,6 +83,7 @@ button:hover {
 ul.reviews{
     box-shadow: 0 0 5px #999;
     list-style: none;
+    width: 100%;
 }
 
 .reviews h1{

@@ -40,5 +40,4 @@ public class UserController {
         return executeString(() -> userService.addOrder(user.getUsername(), dishId, quantity));
     }
 
-
 }
