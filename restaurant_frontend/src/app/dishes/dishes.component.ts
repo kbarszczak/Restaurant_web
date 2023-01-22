@@ -84,9 +84,7 @@ export class DishesComponent{
 
     remove(event: any) {
         let id = event.target.parentElement.parentElement.id
-        this.service.removeDish(id).subscribe(p =>
-            console.log(p)
-        )
+        this.service.removeDish(id)
         this.dishes = this.dishes.filter(p => p.id !== id)
         this.filteredDishes = this.filteredDishes.filter(p => p.id !== id)
     }

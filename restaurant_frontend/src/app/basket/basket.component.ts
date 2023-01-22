@@ -39,9 +39,7 @@ export class BasketComponent {
 
     buy() {
         for(let dish of this.service.dishes){
-            this.service.buy(dish.id, dish.selectedQuantity).subscribe(r =>
-                console.log(r)
-            )
+            this.service.buy(dish.id, dish.selectedQuantity)
         }
         this.service.dishes = []
     }
