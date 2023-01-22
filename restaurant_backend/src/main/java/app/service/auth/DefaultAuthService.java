@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class DefaultAuthService implements AuthService{
 
-    private final long tokenValidForMs = TimeUnit.MINUTES.toMillis(10);
-    private final long refreshTokenValidForMs = TimeUnit.HOURS.toMillis(1);
+    private final long tokenValidForMs = TimeUnit.MINUTES.toMillis(60);
+    private final long refreshTokenValidForMs = TimeUnit.HOURS.toMillis(5);
 
     private final AuthenticationManager authenticationManager;
     private final UserDao userDao;

@@ -1,23 +1,41 @@
 <div *ngIf="dish !== null; else elseBlock" class="container">
 
-    <div class="field">
-        <div class="field-image">
-            <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
+    <div class="description">
+        <div class="field">
+            <div class="field-image">
+                <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
+            </div>
+        </div>
+        <div class="field">
+            <ul>
+                <li><span>{{dish.name}}</span> {{dish.price}}USD</li>
+                <li>{{dish.category}} {{dish.type.toLowerCase()}}</li>
+            </ul>
+        </div>
+        <div class="field ingredients">
+            <p>Ingredients</p>
+            <ul>
+                <li *ngFor="let ingredient of dish.ingredients">{{ingredient}}</li>
+            </ul>
+        </div>
+        <div *ngIf="canReview" class="field ingredients gap">
+            <div class="review-box">
+                <p>Write a review</p>
+                <input (keyup)="updateReview($event)" type="text">
+                <button (click)="addReview()">Add</button>
+                <p *ngIf="error!==''" class="red">{{error}}/p>
+            </div>
+        </div>
+
+        <div class="field gap">
+            <ul class="reviews">
+                <li *ngFor="let review of reviews">
+                    <h1>Review by {{review.author.name}}</h1>
+                    <p>{{review.description}}</p>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="field">
-        <ul>
-            <li><span class="left">{{dish.name}}</span><span class="right">{{dish.price}}USD</span></li>
-            <li><span class="left">{{dish.category}}</span><span class="right">{{dish.type.toLowerCase()}}</span></li>
-        </ul>
-    </div>
-    <div class="field">
-        <p>Ingredients</p>
-        <ul>
-            <li *ngFor="let ingredient of dish.ingredients">{{ingredient}}</li>
-        </ul>
-    </div>
-
 
 </div>
 <ng-template #elseBlock>

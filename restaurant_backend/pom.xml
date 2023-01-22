@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
         <relativePath/>
     </parent>
     <groupId>agh.isi.web</groupId>
@@ -21,7 +21,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <javax.xml.bind.jaxb.version>2.3.1</javax.xml.bind.jaxb.version>
         <io.jsonwebtoken.jjwt.version>0.9.1</io.jsonwebtoken.jjwt.version>
-        <spring.boot.dependencies.version>3.0.0</spring.boot.dependencies.version>
+        <spring.boot.dependencies.version>3.0.1</spring.boot.dependencies.version>
     </properties>
 
     <dependencies>

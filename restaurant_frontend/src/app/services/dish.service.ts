@@ -34,4 +34,12 @@ export class DishService {
         })
         return this.http.get<boolean>(environment.baseUrl + ApiPaths.CanReview + "?dishId=" + id, {headers: headers})
     }
+
+    addReview(id: string, text: string, mark: number){
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.auth.token()}`
+        })
+        return this.http.post<string>(environment.baseUrl + ApiPaths.Review + "/" + id + "/reviews?text="+text+"&rating="+mark, {headers: headers})
+    }
 }
