@@ -79,6 +79,16 @@ export class AuthService {
         return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
     }
 
+    token(): string{
+        let token = localStorage.getItem("token")
+        return token !== null ? token : "";
+    }
+
+    refreshToken(): string{
+        let token = localStorage.getItem("refresh_token");
+        return token !== null ? token : "";
+    }
+
     isAdmin() {
         return localStorage.getItem("is_admin") === "true"
     }

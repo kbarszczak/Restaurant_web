@@ -40,6 +40,10 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/refresh")
                 .permitAll()
 
+                // enable authentication options
+                .requestMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
+
                 // users
 
                 // managing dishes
@@ -72,7 +76,7 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+                registry.addMapping("/**").allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH").allowedHeaders("Authorization", "Content-Type");
             }
         };
     }

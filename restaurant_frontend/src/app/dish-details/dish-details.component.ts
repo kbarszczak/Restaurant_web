@@ -15,12 +15,14 @@ export class DishDetailsComponent {
     service: DishService
     dish: Dish | null
     reviews: Array<Review>
+    canReview: boolean
 
     constructor(route: ActivatedRoute, service: DishService) {
         this.route = route
         this.service = service
         this.dish = null
         this.reviews = []
+        this.canReview = false
 
         let id = this.route.snapshot.paramMap.get("id")
         this.service.loadDishById(id).subscribe(p => {
@@ -29,7 +31,10 @@ export class DishDetailsComponent {
 
         this.service.loadDishReviews(id).subscribe(p => {
             this.reviews = p
-            console.log("Reviews '"+this.reviews+"'")
+        })
+
+        this.service.canReview(id).subscribe(p => {
+            this.canReview = p
         })
     }
 

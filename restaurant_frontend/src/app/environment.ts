@@ -8,4 +8,5 @@ export enum ApiPaths {
     DishesAll = "/api/v1/dishes",
     Dish = "/api/v1/dishes",
     Review = "/api/v1/dishes",
+    CanReview = "/api/v1/users/orders/exist",
 }
