@@ -15,4 +15,16 @@ export class BasketService {
     add(dish: Dish){
         this.dishes.push(dish)
     }
+
+    getCount(): number {
+        let result = 0
+        for(let dish of this.dishes){
+            result += dish.selectedQuantity
+        }
+        return result
+    }
+
+    isHuge() {
+        return this.getCount() >= 10
+    }
 }

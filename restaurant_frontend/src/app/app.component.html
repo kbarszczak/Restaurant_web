@@ -6,7 +6,7 @@
     </div>
     <div *ngIf="auth.isLoggedIn(); else elseBlock" class="menu">  <!-- logged in user -->
         <a routerLink="/dishes">Dishes</a>
-        <a routerLink="/basket">Basket</a>
+        <a routerLink="/basket"><mat-icon>shopping_cart</mat-icon><span *ngIf="basket.isHuge(); else elseColor" class="red">{{basket.getCount()}}</span><ng-template #elseColor>{{basket.getCount()}}</ng-template></a>
         <a (click)="auth.logout()">Logout</a>
     </div>
     <ng-template #elseBlock> <!-- guest -->

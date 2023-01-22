@@ -1,19 +1,24 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DishService} from "../services/dish.service";
 import {Dish} from "../model/dish";
 import {AuthService} from "../services/auth.service";
 import {BasketService} from "../services/basket.service";
+import {AngularFirestore} from "angular2/firestore"
 
 @Component({
     selector: 'app-dishes',
     templateUrl: './dishes.component.html',
     styleUrls: ['./dishes.component.css']
 })
-export class DishesComponent {
+export class DishesComponent implements OnInit{
 
-    // todo: basket count
     // todo: click to item and redirect
+    // todo: fix bug that basket have and list not
+    dishes$;
+    // routing
+    private afs: AngularFirestore;
 
+    // component fields
     service: DishService
     auth: AuthService
     basket: BasketService
@@ -56,16 +61,26 @@ export class DishesComponent {
         })
     }
 
+    ngOnInit(): void {
+
+        // todo
+    }
+
     decrease(event: any) {
         let dish = this.findDishById(event.target.parentElement.parentElement.id)
         if(dish.selectedQuantity > 0) dish.selectedQuantity--;
-        // todo: update basket
+        if(dish.selectedQuantity === 0) {
+            const index = this.basket.dishes.indexOf(dish);
+            if (index > -1) {
+                this.basket.dishes.splice(index, 1);
+            }
+        }
     }
 
     increase(event: any) {
         let dish = this.findDishById(event.target.parentElement.parentElement.id)
-        if(dish.selectedQuantity < dish.maxQuantity) dish.selectedQuantity++;
-        // todo: update basket
+        if(dish.selectedQuantity == 0) this.basket.dishes.push(dish)
+            if(dish.selectedQuantity < dish.maxQuantity) dish.selectedQuantity++;
     }
 
     remove(event: any) {
@@ -99,7 +114,6 @@ export class DishesComponent {
     pageItemsCountChanged(event: any) {
         if(event.target.value > 0){
             this.onPageItems = event.target.value
-            this.currentPageIndex = 0
             this.reloadPage()
         }
     }
@@ -126,6 +140,7 @@ export class DishesComponent {
             }
             this.pageDishes.push(pageDishes)
         }
+        this.currentPageIndex = 0
     }
 
     private applyFilters(){

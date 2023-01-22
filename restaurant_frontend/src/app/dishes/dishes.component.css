@@ -88,6 +88,11 @@ button {
     transition: .15s all ease-in-out;
 }
 
+.admin-button{
+    width: 100%;
+    color: #ff3333;
+}
+
 button:hover {
     box-shadow: 0 0 6px #000;
 }
@@ -118,5 +123,4 @@ button:hover {
 
 .red {
     color: #ff3333;
-    width: 100%;
 }

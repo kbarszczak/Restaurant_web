@@ -27,7 +27,9 @@
             <div *ngFor="let dish of pageDishes[currentPageIndex]" class="item" id="{{dish.id}}">
                 <div class="field">
                     <div class="field-image">
-                        <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
+                        <a [routerLink]="['/dishes', dish.id]">
+                            <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
+                        </a>
                     </div>
                 </div>
                 <div class="field">
@@ -36,11 +38,11 @@
                 </div>
                 <div *ngIf="auth.isLoggedIn()" class="field">
                     <button (click)="decrease($event)">-</button>
-                    <p>{{dish.selectedQuantity}}</p>
+                    <p><span *ngIf="dish.maxQuantity - dish.selectedQuantity<=3; else elseColor" class="red">{{dish.selectedQuantity}}</span><ng-template #elseColor>{{dish.selectedQuantity}}</ng-template></p>
                     <button (click)="increase($event)">+</button>
                 </div>
                 <div *ngIf="auth.isAdmin()" class="field">
-                    <button (click)="remove($event)" class="red">Remove</button>
+                    <button (click)="remove($event)" class="admin-button">Remove</button>
                 </div>
             </div>
         </div>

@@ -12,6 +12,9 @@ import { RegisterComponent } from './register/register.component';
 import {HttpClientModule} from "@angular/common/http";
 import {DishService} from "./services/dish.service";
 import {BasketService} from "./services/basket.service";
+import {MatIconModule} from "@angular/material/icon";
+import {MatBadgeModule} from "@angular/material/badge";
+import { DishDetailsComponent } from './dish-details/dish-details.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,15 @@ import {BasketService} from "./services/basket.service";
     HomeComponent,
     BasketComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DishDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    MatBadgeModule
   ],
   providers: [
       AuthService,
