@@ -1,23 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpStatusCode} from "@angular/common/http";
+import {environment} from "../environment";
+import {ApiPaths} from "../environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    private http: HttpClient
-    private readonly url: string
     error: string
 
-    constructor(http: HttpClient) {
-        this.http = http;
-        this.url = "http://localhost:9090"
+    constructor() {
         this.error = ""
     }
 
     async login(email: string, password: string) {
-        await fetch(this.url + "/api/v1/auth/login", {
+        await fetch(environment.baseUrl + ApiPaths.Auth, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,7 +50,7 @@ export class AuthService {
     }
 
     async register(name: string, surname: string, email: string, password: string) {
-        await fetch(this.url + "/api/v1/auth/register", {
+        await fetch(environment.baseUrl + ApiPaths.Register, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

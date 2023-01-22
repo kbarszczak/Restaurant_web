@@ -1,0 +1,18 @@
+<div class="items">
+    <div *ngFor="let dish of dishes" class="item" id="{{dish.id}}">
+        <div class="field">
+            <div class="field-image">
+                <img src="{{dish.imageUrl}}" alt="{{dish.name}}">
+            </div>
+        </div>
+        <div class="field">
+            <p>{{dish.name}}</p>
+            <p>{{dish.price}}USD</p>
+        </div>
+        <div *ngIf="auth.isLoggedIn()" class="field">
+            <button (click)="decrease($event)">-</button>
+            <p>{{dish.selectedQuantity}}</p>
+            <button (click)="increase($event)">+</button>
+        </div>
+    </div>
+</div>

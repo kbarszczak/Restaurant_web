@@ -5,11 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { HomeComponent } from './home/home.component';
-import {AuthService} from "./auth.service";
+import {AuthService} from "./services/auth.service";
 import { BasketComponent } from './basket/basket.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {HttpClientModule} from "@angular/common/http";
+import {DishService} from "./services/dish.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule
   ],
   providers: [
-      AuthService
+      AuthService,
+      DishService
   ],
   bootstrap: [AppComponent]
 })
