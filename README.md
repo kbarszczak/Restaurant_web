@@ -13,9 +13,11 @@ This project was made to learn the Angular framework and make me more familiar a
 
 ## Screenshots
 
-The application layout (user view):
+The application layout (guest view):
 
+![Screenshot 2023-04-13 124853](https://user-images.githubusercontent.com/72699445/231736627-38e5eecb-b89d-4652-9515-0185c44bf54a.png)
 
+![Screenshot 2023-04-13 124908](https://user-images.githubusercontent.com/72699445/231736635-c94df424-71d0-410d-89f8-97a8f779730f.png)
 
 ## Tech/Framework used
 
@@ -33,16 +35,45 @@ The system uses:
 
 ## Features
 
+The key features of this application:
+- JWT authentication method
+- CORS configured to apply only certain requests
+
 ## Installation
 
 1. First of all clone the repository:
 ```
-mkdir load-balancer
-cd load-balancer
-git clone https://github.com/kbarszczak/DB_load_balancer .
+mkdir restaurant
+cd restaurant
+git clone https://github.com/kbarszczak/Restaurant_web .
 ```
 
-## How to Use?
+2. The next step is to download all dependencies and create jar file for the backend:
+```
+cd restaurant_backend
+mvn clean install
+```
+
+3. Now create a docker image for the backend app:
+```
+docker build -t restaurant-api .
+```
+
+4. The last thing in the backend setup is to run all required images:
+```
+docker compose up -d
+```
+
+From now on the MongoDB, Mongo Express, and the restaurant backend are set up and accessible under the specified in the docker-compose.yml file ports.
+
+5. The next step is to run the frontend app. To do so do the following:
+```
+cd ../restaurant_frontend
+npm install
+ng serve --port 9091
+```
+
+Henceforth our restaurant is accessible under the url: [localhost](http://localhost:9091/)
 
 ## Contribute
 - clone the repository
